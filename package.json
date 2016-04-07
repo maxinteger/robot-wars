@@ -1,0 +1,23 @@
+{
+  "name": "robot-wars",
+  "version": "1.0.0",
+  "description": "OT test app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "./node_modules/.bin/tape 'test/**/*.js'"
+  },
+  "engines" : {
+    "node" : ">=4.0"
+  },
+  "author": "Laszlo Vadasz",
+  "license": "MIT",
+  "dependencies": {
+    "hapi": "^13.3.0",
+    "joi": "^8.0.5",
+    "lodash": "^4.8.2"
+  },
+  "devDependencies": {
+    "tape": "^4.5.1"
+  }
+}
