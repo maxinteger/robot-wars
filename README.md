@@ -9,15 +9,13 @@
 
     npm start
 
+## API documentation
+
+- [http://localhost:5000/api/robot](http://localhost:5000/api/robot)
+
 ## Try with curl
 
-on localhost
-
     curl -H "Content-Type: application/json" -X POST -d '{"width":5,"height":5,"robots":[{"x":1,"y":2,"heading":"N","actions":"LMLMLMLMM"},{"x":3,"y":3,"heading":"E","actions":"MMRMMRMRRM"}]}' http://localhost:5000/api/robot
-
-Or on https://robot-wars-vjaklocpwq.now.sh
-
-    curl -H "Content-Type: application/json" -X POST -d '{"width":5,"height":5,"robots":[{"x":1,"y":2,"heading":"N","actions":"LMLMLMLMM"},{"x":3,"y":3,"heading":"E","actions":"MMRMMRMRRM"}]}' https://robot-wars-vjaklocpwq.now.sh/api/robot
 
 ## Test
 
@@ -71,4 +69,4 @@ In order to confirm your API is working correctly, we have provided some test in
 ## Assumptions
 
 - Two or more robots can not stay on the same grid point
-- The robots coordinates are valid in the input
+- Every input contains valid robot coordinates (see the first point)
