@@ -11,7 +11,7 @@
 
 ## API documentation
 
-- [http://localhost:5000/api/robot](http://localhost:5000/api/robot)
+- [localhost:5000/docs](http://localhost:5000/docs)
 
 ## Try with curl
 
