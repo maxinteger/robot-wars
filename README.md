@@ -67,3 +67,8 @@ In order to confirm your API is working correctly, we have provided some test in
 
     1 3 N
     5 1 E
+
+## Assumptions
+
+- Two or more robots can not stay on the same grid point
+- The robots coordinates are valid in the input

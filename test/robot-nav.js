@@ -29,7 +29,7 @@ test('robot with one move action', (t) => {
 	t.same(
 		navigateRobots(5,5, [testRobot(1, 2, 'N', 'M')]),
 		[{x:1, y:3, heading:'N'}],
-		'should move one tile'
+		'should move one grid point'
 	);
 	t.end();
 });
@@ -95,9 +95,9 @@ test('multiple robot', (t) => {
 		]),
 		[
 			{x:1, y:3, heading:'N'},
-			{x:1, y:3, heading:'S'}
+			{x:1, y:4, heading:'S'}
 		],
-		'should not hit each other on the same tile'
+		'should not step on the same grid point'
 	);
 	t.end();
 });

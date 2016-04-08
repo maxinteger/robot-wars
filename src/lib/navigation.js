@@ -4,20 +4,24 @@ const
 	pick = require('lodash/fp/pick'),
 	map = require('lodash/fp/map'),
 	flow = require('lodash/fp/flow'),
+	clamp = require('lodash/fp/clamp'),
 	reduce = require('lodash/fp/reduce'),
-	extend = require('lodash/fp/extend');
+	extend = require('lodash/fp/extend'),
+	findIndex = require('lodash/fp/findIndex');
 
 
 const navigateRobots = (w, h, robots) =>
-	map(flow(navigateRobot, applyBorder(w, h)))(robots);
+	reduce(navigateRobot(w, h), [], robots);
 
 
-const navigateRobot = (robot) => reduce(robotAction, pick(['x', 'y', 'heading'], robot), robot.actions);
+const navigateRobot = (w, h) => (doneList, robot) =>
+	doneList.concat(reduce(robotAction(w, h, doneList), pick(['x', 'y', 'heading'], robot), robot.actions));
 
 
-const robotAction = (robot, action) =>{
+const robotAction = (w, h, doneList) => (robot, action) =>{
 	switch (action){
-		case 'M': return moveRobot(robot);
+		case 'M': const newRobot = flow(moveRobot, applyBorder(w, h))(robot);
+			return containsByCoord(newRobot)(doneList) != -1 ? robot : newRobot;
 		case 'L':
 		case 'R': return turnRobot(robot, action);
 		default: throw Error('Invalid action: ' + action);
@@ -50,9 +54,12 @@ const turnRobot = (robot, turn) => extend(robot, { heading: TURNS[robot.heading]
 
 const applyBorder = (w, h) => (robot) =>
 	extend(robot, {
-		x: Math.min(Math.max(robot.x, 0), w),
-		y: Math.min(Math.max(robot.y, 0), h)
+		x: clamp(0, w, robot.x),
+		y: clamp(0, h, robot.y)
 	});
+
+const containsByCoord = (pos) =>
+	findIndex( (r) => r.x === pos.x && r.y == pos.y);
 
 ////////////////////////////////////////////////////
 
