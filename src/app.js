@@ -10,7 +10,7 @@ server.connection({
 });
 
 
-server.register([], err => {
+server.register([require('vision'), require('inert'), {register: require('lout')}], err => {
     if (err){
         console.error(err);
     }
@@ -19,11 +19,9 @@ server.register([], err => {
 		require('./routes/robot-nav')('/api')
 	]);
 
-    if (!module.parent) {
-        server.start( () =>
-            console.log('Server started on %s ...', server.info.uri)
-        );
-    }
+	server.start( error =>
+		error
+			? console.error(`Houston we have a problem: ${error}`)
+			: console.log('Server started on %s ...', server.info.uri)
+	);
 });
-
-module.exports = server;
